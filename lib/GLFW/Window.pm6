@@ -1,6 +1,9 @@
 #| Object-oriented GLFW window interface
 unit class GLFW::Window is repr('CPointer');
 
+need GLFW;
+need GLFW::Monitor;
+
 #| Creates a new window.  For fullscreen windows, pass a GLFW::Monitor
 #| in $monitor.  To share resources with another window, pass another
 #| GLFW::Window in $window.

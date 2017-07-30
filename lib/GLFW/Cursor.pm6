@@ -1,6 +1,9 @@
 #| Object-oriented interface for GLFW cursors
 unit class Cursor is repr('CPointer');
 
+need GLFW;
+need GLFW::Image;
+
 constant Arrow     = 0x00036001;
 constant IBeam     = 0x00036002;
 constant Crosshair = 0x00036003;

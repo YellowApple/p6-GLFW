@@ -1,6 +1,10 @@
 #| Object-oriented GLFW monitor interface
 unit class GLFW::Monitor is repr('CPointer');
 
+need GLFW;
+need GLFW::VidMode;
+need GLFW::GammaRamp;
+
 #| Returns the "primary" monitor
 method primary() {
     GLFW::get-primary-monitor();

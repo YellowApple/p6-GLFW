@@ -3,56 +3,6 @@ unit module GLFW;
 use NativeCall;
 
 ########################################################################
-# Constants                                                            #
-########################################################################
-
-constant MAJOR = 3
-constant MINOR = 2
-constant REVISION = 1
-
-########################################################################
-# Types / Classes / Structs / Enums / etc.                             #
-########################################################################
-
-our class Cursor is repr('CPointer') {
-    multi method new(GLFW::Image $image, $hotspot) {
-        my (int32 $x, int32 $y) = $hotspot;
-        GLFW::create-cursor($image, $x, $y);
-    }
-    multi method new(int32 $shape) {
-        GLFW::create-standard-cursor($shape);
-    }
-    
-    # FIXME: see comment on DESTROY submethod for Window
-    submethod DESTROY {
-        GLFW::destroy-cursor(self);
-    }
-}
-
-our class VidMode is repr('CStruct') {
-    has int32 $.width;
-    has int32 $.height;
-    has int32 $.red-bits;
-    has int32 $.green-bits;
-    has int32 $.blue-bits;
-    has int32 $.refresh-rate;
-}
-
-our class GammaRamp is repr('CStruct') {
-    has CArray[uint8] $.red;
-    has CArray[uint8] $.green;
-    has CArray[uint8] $.blue;
-    has uint32 $.size;
-}
-
-our class Image is repr('CStruct') {
-    has int32 $.width;
-    has int32 $.height;
-    has CArray[uint8] $.pixels;
-}
-
-
-########################################################################
 # Native C API                                                         #
 ########################################################################
 
