@@ -1,4 +1,6 @@
-unit class Image is repr('CStruct');
+unit class GLFW::Image is repr('CStruct');
+
+use NativeCall;
 
 has int32 $.width;
 has int32 $.height;

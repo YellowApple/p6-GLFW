@@ -1,5 +1,7 @@
 #| Object-oriented GLFW monitor interface
-unit class GLFW::Monitor is repr('CPointer');
+unit class GLFW::Monitor is Any is repr('CPointer');
+
+use NativeCall;
 
 need GLFW;
 need GLFW::VidMode;
@@ -81,3 +83,60 @@ method gamma-ramp() is rw {
             GLFW::set-gamma-ramp(self, $ramp);
         });
 }
+
+
+
+########################################################################
+# Native C API                                                         #
+########################################################################
+
+our sub get-monitors(
+    int32 $count is rw
+) returns CArray[GLFW::Monitor] is native('glfw') is symbol('glfwGetMonitors') {*}
+
+our sub get-primary-monitor(
+    --> GLFW::Monitor
+) is native('glfw') is symbol('glfwGetPrimaryMonitor') {*}
+
+our sub get-monitor-pos(
+    GLFW::Monitor $monitor,
+    int32 $xpos is rw,
+    int32 $ypos is rw
+) is native('glfw') is symbol('glfwGetMonitorPos') {*}
+
+our sub get-monitor-physical-size(
+    GLFW::Monitor $monitor,
+    int32 $width-mm is rw,
+    int32 $height-mm is rw
+) is native('glfw') is symbol('glfwGetMonitorPhysicalSize') {*}
+
+our sub get-monitor-name(
+    GLFW::Monitor $monitor
+) returns Str is native('glfw') is symbol('glfwGetMonitorName') {*}
+
+our sub set-monitor-callback(
+    &callback (GLFW::Monitor, int32)
+) is native('glfw') is symbol('glfwSetMonitorCallback') {*}
+
+our sub get-video-modes(
+    GLFW::Monitor $monitor,
+    int32 $count is rw
+) returns CArray[GLFW::VidMode] is native('glfw') is symbol('glfwGetVideoModes') {*}
+
+our sub get-video-mode(
+    GLFW::Monitor $monitor
+) returns GLFW::VidMode is native('glfw') is symbol('glfwGetVideoMode'){*}
+
+our sub set-gamma(
+    GLFW::Monitor $monitor,
+    num32 $gamma
+) is native('glfw') is symbol('glfwSetGamma') {*}
+
+our sub get-gamma-ramp(
+    GLFW::Monitor $monitor
+) returns GLFW::GammaRamp is native('glfw') is symbol('glfwGetGammaRamp') {*}
+
+our sub set-gamma-ramp(
+    GLFW::Monitor $monitor,
+    GLFW::GammaRamp $ramp
+) is native('glfw') is symbol('glfwSetGammaRamp') {*}

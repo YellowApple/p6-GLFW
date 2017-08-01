@@ -1,4 +1,4 @@
-unit module ErrorCode;
+unit module GLFW::ErrorCode;
 
 constant NotInitialized     = 0x00010001;
 constant NoCurrentContext   = 0x00010002;

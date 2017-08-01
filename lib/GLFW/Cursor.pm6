@@ -1,5 +1,7 @@
 #| Object-oriented interface for GLFW cursors
-unit class Cursor is repr('CPointer');
+unit class GLFW::Cursor is repr('CPointer');
+
+use NativeCall;
 
 need GLFW;
 need GLFW::Image;
@@ -26,3 +28,23 @@ multi method new(int32 $shape) {
 submethod DESTROY {
     GLFW::destroy-cursor(self);
 }
+
+
+
+########################################################################
+# Native C API                                                         #
+########################################################################
+
+our multi sub create-cursor(
+    GLFW::Image $image,
+    int32 $xhot,
+    int32 $yhot
+) returns GLFW::Cursor is native('glfw') is symbol('glfwCreateCursor') {*}
+
+our multi sub create-cursor(
+    int32 $shape
+) returns GLFW::Cursor is native('glfw') is symbol('glfwCreateStandardCursor') {*}
+
+our sub destroy-cursor(
+    GLFW::Cursor $cursor
+) is native('glfw') is symbol('glfwDestroyCursor') {*}

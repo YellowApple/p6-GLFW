@@ -1,4 +1,4 @@
-unit class VidMode is repr('CStruct');
+unit class GLFW::VidMode is repr('CStruct');
 
 has int32 $.width;
 has int32 $.height;

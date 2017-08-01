@@ -1,4 +1,6 @@
-unit class GammaRamp is repr('CStruct');
+unit class GLFW::GammaRamp is repr('CStruct');
+
+use NativeCall;
 
 has CArray[uint8] $.red;
 has CArray[uint8] $.green;

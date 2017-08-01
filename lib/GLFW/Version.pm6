@@ -1,4 +1,4 @@
-unit module Version;
+unit module GLFW::Version;
 
 constant Major = 3;
 constant Minor = 2;
