@@ -35,13 +35,13 @@ submethod DESTROY {
 # Native C API                                                         #
 ########################################################################
 
-our multi sub create-cursor(
+multi sub create-cursor(
     GLFW::Image $image,
     int32 $xhot,
     int32 $yhot
 ) returns GLFW::Cursor is native('glfw') is symbol('glfwCreateCursor') {*}
 
-our multi sub create-cursor(
+multi sub create-cursor(
     int32 $shape
 ) returns GLFW::Cursor is native('glfw') is symbol('glfwCreateStandardCursor') {*}
 
