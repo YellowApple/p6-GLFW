@@ -2,23 +2,23 @@ unit module GLFW::Key;
 
 # Just a bunch of constants, really.
 
-constant RELEASE = 0
-constant PRESS = 1
-constant REPEAT = 2
+constant RELEASE = 0;
+constant PRESS = 1;
+constant REPEAT = 2;
 
-constant UNKNOWN = -1
-constant SPACE = 32
-constant APOSTROPHE = 39  # '
-constant COMMA = 44  # ,
-constant MINUS = 45  # -
-constant PERIOD = 46  # .
-constant SLASH = 47  # /
+constant UNKNOWN = -1;
+constant SPACE = 32;
+constant APOSTROPHE = 39;  # '
+constant COMMA = 44;  # ,
+constant MINUS = 45;  # -
+constant PERIOD = 46;  # .
+constant SLASH = 47;  # /
 
-constant ZERO = 48
-constant ONE = 49
-constant TWO = 50
-constant THREE = 51
-constant FOUR = 52
+constant ZERO = 48;
+constant ONE = 49;
+constant TWO = 50;
+constant THREE = 51;
+constant FOUR = 52;
 constant FIVE = 53;
 constant SIX = 54;
 constant SEVEN = 55;
@@ -136,7 +136,7 @@ constant RIGHT-ALT = 346;
 constant RIGHT-SUPER = 347;
 constant MENU = 348;
 
-constant LAST = $MENU;
+constant LAST = MENU;
 
 module Modifier {
     constant SHIFT = 1;
