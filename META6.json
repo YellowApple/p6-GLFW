@@ -16,6 +16,7 @@
         "GLFW::Monitor"           : "lib/GLFW/Monitor.pm6",
         "GLFW::Mouse"             : "lib/GLFW/Mouse.pm6",
         "GLFW::Version"           : "lib/GLFW/Version.pm6",
+        "GLFW::VidMode"           : "lib/GLFW/VidMode.pm6",
         "GLFW::Window"            : "lib/GLFW/Window.pm6",
         "GLFW::Window::Attribute" : "lib/GLFW/Window/Attribute.pm6"
     },
