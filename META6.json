@@ -23,5 +23,5 @@
     "depends"     : [],
     "resources"   : [],
     "source-url"  : "git://github.com/YellowApple/p6-GLFW.git",
-    "tags"        : [ "graphics", "input", "windowing", "media", "interactive", "glfw", "opengl" ],
+    "tags"        : [ "graphics", "input", "windowing", "media", "interactive", "glfw", "opengl" ]
 }
