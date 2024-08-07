@@ -16,17 +16,12 @@ sub key-callback(GLFW::Window $window,
                  int32 $action,
                  int32 $mods) {
     if $key == 256 and $action == 1 {
-        # FIXME: why does MoarVM panic here?
-        $window.should_close = True;
-	# I originally thought that doing the procedural equivalent,
-	# i.e. GLFW::set-window-should-close($window, True), was
-	# enough to work around this, but as of MoarVM 2024.04 even
-	# that seems to cause a panic, too.  What gives?
+	$window.should-close = True;
     }
 }
 
 sub close-callback(GLFW::Window $window) {
-    say "HIT";
+    say "HIT 2";
 }
 
 sub start-gui() {

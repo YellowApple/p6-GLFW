@@ -32,7 +32,6 @@ method should-close() is rw {
             window-should-close(self);
         },
         STORE => sub ($, $value) {
-            # TODO: figure out why this causes MoarVM to panic
             set-window-should-close(self, $value);
         });
 }
@@ -397,7 +396,7 @@ our sub window-should-close(
 
 our sub set-window-should-close(
     GLFW::Window $window,
-    int32 $value  # Previously int32(Bool); FIXME: does this still work?
+    int32 $value
 ) is native('glfw', v3) is symbol('glfwSetWindowShouldClose') {*}
 
 our sub set-window-title(
