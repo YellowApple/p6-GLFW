@@ -1,18 +1,18 @@
-# GLFW Perl 6 Wrapper
+# GLFW ~~Perl 6~~ Raku Wrapper
 
 Very much a work in progress.  Thoroughly untested.  Use at your own
 risk.
 
 ## ...But Why?
 
-I wanted to learn Perl 6, and I wanted to learn GLFW.  Both are still
-in progress.
+I wanted to learn ~~Perl 6~~ Raku, and I wanted to learn GLFW.  Both
+are still in progress.
 
 ## How complete is it?
 
 Well, the full GLFW API is (as far as I can tell) implemented, and
-most things are wrapped up in classes to provide a nice Perlish
-object-oriented interface.  However...
+most things are wrapped up in classes to provide a nice ~~Perlish~~
+Rakuish object-oriented interface.  However...
 
 ## How correct is it?
 

@@ -27,7 +27,7 @@ submethod DESTROY {
 #| for now, setting this should be done through
 #| GLFW::set-window-should-close.
 method should-close() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {
             window-should-close(self);
         },
@@ -37,17 +37,18 @@ method should-close() is rw {
         });
 }
 
+#| Set the window's title.
 method title() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, $value) {
             set-window-title(self, $value);
         });
 }
 
-#| Set the window's title.
+#| Set the window's icon.
 method icon() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, $value) {
             set-window-icon(self, $value);
@@ -57,7 +58,7 @@ method icon() is rw {
 #| Get or set the window's position in screen units.  Accepts/returns
 #| a list containing the X and Y coordinates.
 method position() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) { get-window-position(self); },
         STORE => sub ($, $pos) {
             my (int32 $x, int32 $y) = $pos;
@@ -68,7 +69,7 @@ method position() is rw {
 #| Get or set the window's size in screen units.  Accepts/returns a
 #| list containing the width and height.
 method size() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) { get-window-size(self); },
         STORE => sub ($, $size) {
             my (int32 $width, int32 $height) = $size;
@@ -85,7 +86,7 @@ method size() is rw {
 #| list containing the minimum and maximum sizes, each of which in
 #| turn being a width/height list.
 method size-limits() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, $limits) {
             my ($min, $max) = $limits;
@@ -100,7 +101,7 @@ method size-limits() is rw {
 
 #| Set the window's aspect ratio.
 method aspect-ratio() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, $ratio) {
             my (int32 $numerator, int32 $denominator) = $ratio;
@@ -116,7 +117,7 @@ method aspect-ratio() is rw {
 #| (a list of coordinates in screen units), size/resolution (a list of
 #| dimensions in screen units), and refresh rate (in Hz).
 method monitor() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) { get-window-monitor(self); },
         STORE => sub ($, $args) {
             my (GLFW::Monitor $m, $params) = $args;
@@ -133,7 +134,7 @@ method attribute($a) { get-window-attribute(self, $a); }
 
 #| Gets or sets the window's "user pointer".
 method user-pointer() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) { get-window-user-pointer(self); },
         STORE => sub ($, $pointer) {
             set-window-user-pointer(self, $pointer);
@@ -173,7 +174,7 @@ method hide() { hide-window(self); }
 # FIXME: this probably doesn't work the way I'd like it to work
 #| Gets/sets the window's input mode
 method input-mode($mode) is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) { get-input-mode(self, $mode); },
         STORE => sub ($, $value) {
             set-input-mode(self, $mode, $value);
@@ -188,7 +189,7 @@ method mouse-button($button) { get-mouse-button(self, $button); }
 
 #| Gets/sets the mouse cursor position
 method cursor-position() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {
             my (num64 $x, num64 $y);
             get-cursor-position(self, $x, $y);
@@ -202,7 +203,7 @@ method cursor-position() is rw {
 
 #| Gets/sets the clipboard contents
 method clipboard() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) { get-clipboard-string(self); },
         STORE => sub ($, $content) {
             set-clipboard-string(self, $content);
@@ -225,7 +226,7 @@ method swap-buffers() {
 #| callback subroutine should accept a window, an X coordinate, and a
 #| Y coordinate.
 method position-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-window-position-callback(self, &callback);
@@ -235,7 +236,7 @@ method position-callback() is rw {
 #| Sets a callback to be run whenever the window is resized.  The
 #| callback subroutine should accept a window, a width, and a height.
 method size-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-window-size-callback(self, &callback);
@@ -245,7 +246,7 @@ method size-callback() is rw {
 #| Sets a callback to be run when the window is closed.  The callback
 #| subroutine should accept a window.
 method close-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-window-close-callback(self, &callback);
@@ -255,7 +256,7 @@ method close-callback() is rw {
 #| Sets a callback to be run when the window's content is refreshed.
 #| The callback subroutine should accept a window.
 method refresh-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-window-refresh-callback(self &callback);
@@ -265,7 +266,7 @@ method refresh-callback() is rw {
 #| Sets a callback to be run when the window is iconified.  The
 #| callback subroutine should accept a window.
 method iconify-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-window-iconify-callback(self, &callback);
@@ -276,7 +277,7 @@ method iconify-callback() is rw {
 #| resized.  The callback subroutine should accept a window, a width,
 #| and a height.
 method framebuffer-size-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-framebuffer-size-callback(self, &callback);
@@ -288,7 +289,7 @@ method framebuffer-size-callback() is rw {
 #| keycode, a system-specific scancode, an action
 #| (press/release/repeat), and a modifier key bitmask.
 method key-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-key-callback(self, &callback);
@@ -299,7 +300,7 @@ method key-callback() is rw {
 #| The callback subroutine should accept a window and a Unicode code
 #| point.
 method char-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-char-callback(self, &callback);
@@ -309,7 +310,7 @@ method char-callback() is rw {
 #| Equivalent to $window.char-callback, but with the addition of a
 #| bitmask representing the active modifier keys.
 method char-mods-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-char-mods-callback(self, &callback);
@@ -320,7 +321,7 @@ method char-mods-callback() is rw {
 #| the window.  The callback subroutine should accept a window, the
 #| new X coordinate, and the new Y coordinate.
 method cursor-position-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-cursor-position-callback(self, &callback);
@@ -331,7 +332,7 @@ method cursor-position-callback() is rw {
 #| leaves the window.  The callback should accept a window and an
 #| integer pretending to be a boolean.
 method cursor-enter-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-cursor-enter-callback(self, &callback);
@@ -342,7 +343,7 @@ method cursor-enter-callback() is rw {
 #| (e.g. with the mouse scrollwheel).  The callback should accept a
 #| window, a horizontal offset, and a vertical offset.
 method scroll-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-scroll-callback(self, &callback);
@@ -356,7 +357,7 @@ method scroll-callback() is rw {
 #| probably want to convert it to a Perl array first (e.g. with
 #| '@perlarray[$_] = $paths[$_] for ^$count;').
 method drop-callback() is rw {
-    return Proxy.new(
+    return-rw Proxy.new(
         FETCH => sub ($) {},  # FIXME: no GLFW equivalent
         STORE => sub ($, &callback) {
             set-drop-callback(self, &callback);
@@ -371,12 +372,12 @@ method drop-callback() is rw {
 ########################################################################
 
 our sub default-window-hints(
-) is native('glfw') is symbol('glfwDefaultWindowHints') {*}
+) is native('glfw', v3) is symbol('glfwDefaultWindowHints') {*}
 
 our sub window-hint(
     int32 $hint,
     int32 $value
-) is native('glfw') is symbol('glfwWindowHint') {*}
+) is native('glfw', v3) is symbol('glfwWindowHint') {*}
 
 our sub create-window(
     int32 $width,
@@ -384,49 +385,49 @@ our sub create-window(
     Str $title,
     GLFW::Monitor $monitor,
     GLFW::Window $share
-) returns GLFW::Window is native('glfw') is symbol('glfwCreateWindow') {*}
+) returns GLFW::Window is native('glfw', v3) is symbol('glfwCreateWindow') {*}
 
 our sub destroy-window(
     GLFW::Window $window
-) is native('glfw') is symbol('glfwCreateWindow') {*}
+) is native('glfw', v3) is symbol('glfwCreateWindow') {*}
 
 our sub window-should-close(
     GLFW::Window $window
-) returns Bool is native('glfw') is symbol('glfwWindowShouldClose') {*}
+) returns Bool is native('glfw', v3) is symbol('glfwWindowShouldClose') {*}
 
 our sub set-window-should-close(
     GLFW::Window $window,
-    int32(Bool) $value
-) is native('glfw') is symbol('glfwSetWindowShouldClose') {*}
+    int32 $value  # Previously int32(Bool); FIXME: does this still work?
+) is native('glfw', v3) is symbol('glfwSetWindowShouldClose') {*}
 
 our sub set-window-title(
     GLFW::Window $window,
     Str $title
-) is native('glfw') is symbol('glfwSetWindowTitle') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowTitle') {*}
 
 our sub set-window-icon(
     GLFW::Window $window,
     int32 $count,
     CArray[GLFW::Image] $images
-) is native('glfw') is symbol('glfwSetWindowIcon') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowIcon') {*}
 
 our sub get-window-position(
     GLFW::Window $window,
     int32 $xpos is rw,
     int32 $ypos is rw
-) is native('glfw') is symbol('glfwGetWindowPos') {*}
+) is native('glfw', v3) is symbol('glfwGetWindowPos') {*}
 
 our sub set-window-position(
     GLFW::Window $window,
     int32 $xpos,
     int32 $ypos
-) is native('glfw') is symbol('glfwSetWindowPos') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowPos') {*}
 
 our sub get-window-size(
     GLFW::Window $window,
     int32 $width is rw,
     int32 $height is rw
-) is native('glfw') is symbol('glfwGetWindowSize') {*}
+) is native('glfw', v3) is symbol('glfwGetWindowSize') {*}
 
 our sub set-window-size-limits(
     GLFW::Window $window,
@@ -434,25 +435,25 @@ our sub set-window-size-limits(
     int32 $min-height,
     int32 $max-width,
     int32 $max-height
-) is native('glfw') is symbol('glfwSetWindowSizeLimits') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowSizeLimits') {*}
 
 our sub set-window-aspect-ratio(
     GLFW::Window $window,
     int32 $numerator,
     int32 $denominator
-) is native('glfw') is symbol('glfwSetWindowAspectRatio') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowAspectRatio') {*}
 
 our sub set-window-size(
     GLFW::Window $window,
     int32 $width,
     int32 $height
-) is native('glfw') is symbol('glfwSetWindowSize') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowSize') {*}
 
 our sub get-framebuffer-size(
     GLFW::Window $window,
     int32 $width is rw,
     int32 $height is rw
-) is native('glfw') is symbol('glfwGetFramebufferSize') {*}
+) is native('glfw', v3) is symbol('glfwGetFramebufferSize') {*}
 
 our sub get-window-frame-size(
     GLFW::Window $window,
@@ -460,35 +461,35 @@ our sub get-window-frame-size(
     int32 $top is rw,
     int32 $right is rw,
     int32 $bottom is rw
-) is native('glfw') is symbol('glfwGetWindowFrameSize') {*}
+) is native('glfw', v3) is symbol('glfwGetWindowFrameSize') {*}
 
 our sub iconify-window(
     GLFW::Window $window
-) is native('glfw') is symbol('glfwIconifyWindow') {*}
+) is native('glfw', v3) is symbol('glfwIconifyWindow') {*}
 
 our sub restore-window(
     GLFW::Window $window
-) is native('glfw') is symbol('glfwRestoreWindow') {*}
+) is native('glfw', v3) is symbol('glfwRestoreWindow') {*}
 
 our sub maximize-window(
     GLFW::Window $window
-) is native('glfw') is symbol('glfwMaximizeWindow') {*}
+) is native('glfw', v3) is symbol('glfwMaximizeWindow') {*}
 
 our sub show-window(
     GLFW::Window $window
-) is native('glfw') is symbol('glfwShowWindow') {*}
+) is native('glfw', v3) is symbol('glfwShowWindow') {*}
 
 our sub hide-window(
     GLFW::Window $window
-) is native('glfw') is symbol('glfwHideWindow') {*}
+) is native('glfw', v3) is symbol('glfwHideWindow') {*}
 
 our sub focus-window(
     GLFW::Window $window
-) is native('glfw') is symbol('glfwFocusWindow') {*}
+) is native('glfw', v3) is symbol('glfwFocusWindow') {*}
 
 our sub get-window-monitor(
     GLFW::Window $window
-) returns GLFW::Monitor is native('glfw') is symbol('glfwGetWindowMonitor') {*}
+) returns GLFW::Monitor is native('glfw', v3) is symbol('glfwGetWindowMonitor') {*}
 
 our sub set-window-monitor(
     GLFW::Window $window,
@@ -498,138 +499,138 @@ our sub set-window-monitor(
     int32 $width,
     int32 $height,
     int32 $refresh-rate
-) is native('glfw') is symbol('glfwSetWindowMonitor') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowMonitor') {*}
 
 our sub get-window-attribute(
     GLFW::Window $window,
     int32 $attrib
-) returns int32 is native('glfw') is symbol('glfwGetWindowAttrib') {*}
+) returns int32 is native('glfw', v3) is symbol('glfwGetWindowAttrib') {*}
 
 our sub set-window-user-pointer(
     GLFW::Window $window,
     Pointer $pointer
-) is native('glfw') is symbol('glfwSetWindowUserPointer') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowUserPointer') {*}
 
 our sub get-window-user-pointer(
     GLFW::Window $window
-) returns Pointer is native('glfw') is symbol('glfwGetWindowUserPointer') {*}
+) returns Pointer is native('glfw', v3) is symbol('glfwGetWindowUserPointer') {*}
 
 our sub set-window-position-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, int32, int32)
-) is native('glfw') is symbol('glfwSetWindowPosCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowPosCallback') {*}
 
 our sub set-window-size-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, int32, int32)
-) is native('glfw') is symbol('glfwSetWindowSizeCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowSizeCallback') {*}
 
 our sub set-window-close-callback(
     GLFW::Window $window,
     &callback (GLFW::Window)
-) is native('glfw') is symbol('glfwSetWindowCloseCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowCloseCallback') {*}
 
 our sub set-window-refresh-callback(
     GLFW::Window $window,
     &callback (GLFW::Window)
-) is native('glfw') is symbol('glfwSetWindowRefreshCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowRefreshCallback') {*}
 
 our sub set-window-iconify-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, int32)
-) is native('glfw') is symbol('glfwSetWindowIconifyCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetWindowIconifyCallback') {*}
 
 our sub set-framebuffer-size-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, int32, int32)
-) is native('glfw') is symbol('glfwSetFramebufferSizeCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetFramebufferSizeCallback') {*}
 
 our sub get-input-mode(
     GLFW::Window $window,
     int32 $mode
-) returns int32 is native('glfw') is symbol('glfwGetInputMode') {*}
+) returns int32 is native('glfw', v3) is symbol('glfwGetInputMode') {*}
 
 our sub set-input-mode(
     GLFW::Window $window,
     int32 $mode,
     int32 $value
-) is native('glfw') is symbol('glfwSetInputMode') {*}
+) is native('glfw', v3) is symbol('glfwSetInputMode') {*}
 
 our sub get-key(
     GLFW::Window $window,
     int32 $key
-) returns int32 is native('glfw') is symbol('glfwGetKey') {*}
+) returns int32 is native('glfw', v3) is symbol('glfwGetKey') {*}
 
 our sub get-mouse-button(
     GLFW::Window $window,
     int32 $button
-) returns int32 is native('glfw') is symbol('glfwGetMouseButton') {*}
+) returns int32 is native('glfw', v3) is symbol('glfwGetMouseButton') {*}
 
 our sub get-cursor-position(
     GLFW::Window $window,
     num64 $xpos is rw,
     num64 $ypos is rw
-) is native('glfw') is symbol('glfwGetCursorPos') {*}
+) is native('glfw', v3) is symbol('glfwGetCursorPos') {*}
 
 our sub set-cursor-position(
     GLFW::Window $window,
     num64 $xpos,
     num64 $ypos
-) is native('glfw') is symbol('glfwSetCursorPos') {*}
+) is native('glfw', v3) is symbol('glfwSetCursorPos') {*}
 
 our sub set-key-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, int32, int32, int32, int32)
-) is native('glfw') is symbol('glfwSetKeyCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetKeyCallback') {*}
 
 our sub set-char-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, uint32)
-) is native('glfw') is symbol('glfwSetCharCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetCharCallback') {*}
 
 our sub set-char-mods-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, uint32, int32)
-) is native('glfw') is symbol('glfwSetCharModsCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetCharModsCallback') {*}
 
 our sub set-mouse-button-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, int32, int32, int32)
-) is native('glfw') is symbol('glfwSetMouseButtonCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetMouseButtonCallback') {*}
 
 our sub set-cursor-position-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, num64, num64)
-) is native('glfw') is symbol('glfwSetCursorPosCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetCursorPosCallback') {*}
 
 our sub set-cursor-enter-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, int32)  # FIXME: should arg2 be int32(Bool)?
-) is native('glfw') is symbol('glfwSetCursorEnterCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetCursorEnterCallback') {*}
 
 our sub set-scroll-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, num64, num64)
-) is native('glfw') is symbol('glfwSetScrollCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetScrollCallback') {*}
 
 our sub set-drop-callback(
     GLFW::Window $window,
     &callback (GLFW::Window, Array[Str])
-) is native('glfw') is symbol('glfwSetDropCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetDropCallback') {*}
 
 our sub set-clipboard-string(
     GLFW::Window $window,
     Str $string
-) is native('glfw') is symbol('glfwSetClipboardString') {*}
+) is native('glfw', v3) is symbol('glfwSetClipboardString') {*}
 
 our sub get-clipboard-string(
     GLFW::Window $window
-) returns Str is native('glfw') is symbol('glfwGetClipboardString') {*}
+) returns Str is native('glfw', v3) is symbol('glfwGetClipboardString') {*}
 
 our sub make-context-current(
     GLFW::Window $window
-) is native('glfw') is symbol('glfwMakeContextCurrent') {*}
+) is native('glfw', v3) is symbol('glfwMakeContextCurrent') {*}
 
 our sub swap-buffers(
     GLFW::Window $window
-) is native('glfw') is symbol('glfwSwapBuffers'){*}
+) is native('glfw', v3) is symbol('glfwSwapBuffers'){*}

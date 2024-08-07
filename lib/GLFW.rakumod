@@ -7,96 +7,96 @@ use NativeCall;
 ########################################################################
 
 our sub init(
-) returns int32 is native('glfw') is symbol('glfwInit') {*}
+) returns int32 is native('glfw', v3) is symbol('glfwInit') {*}
 
 our sub terminate(
-) is native('glfw') is symbol('glfwTerminate') {*}
+) is native('glfw', v3) is symbol('glfwTerminate') {*}
 
 our sub set-error-callback(
     &callback (int32, Str)
-) is native('glfw') is symbol('glfwSetErrorCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetErrorCallback') {*}
 
 our sub get-version(
     int32 $major is rw,
     int32 $minor is rw,
     int32 $rev is rw
-) is native('glfw') is symbol('glfwGetVersion') {*}
+) is native('glfw', v3) is symbol('glfwGetVersion') {*}
 
 our sub get-version-string(
-) returns Str is native('glfw') is symbol('glfwGetVersionString') {*}
+) returns Str is native('glfw', v3) is symbol('glfwGetVersionString') {*}
 
 our sub poll-events(
-) is native('glfw') is symbol('glfwPollEvents') {*}
+) is native('glfw', v3) is symbol('glfwPollEvents') {*}
 
 our sub wait-events(
-) is native('glfw') is symbol('glfwWaitEvents') {*}
+) is native('glfw', v3) is symbol('glfwWaitEvents') {*}
 
 our sub wait-events-timeout(
     num64 $timeout
-) is native('glfw') is symbol('glfwWaitEventsTimeout') {*}
+) is native('glfw', v3) is symbol('glfwWaitEventsTimeout') {*}
 
 our sub post-empty-event(
-) is native('glfw') is symbol('glfwPostEmptyEvent') {*}
+) is native('glfw', v3) is symbol('glfwPostEmptyEvent') {*}
 
 our sub get-key-name(
     int32 $key,
     int32 $scancode
-) returns Str is native('glfw') is symbol('glfwGetKeyName') {*}
+) returns Str is native('glfw', v3) is symbol('glfwGetKeyName') {*}
 
 our sub joystick-present(
     int32 $joystick
-) returns int32(Bool) is native('glfw') is symbol('glfwJoystickPresent') {*}
+) returns int32(Bool) is native('glfw', v3) is symbol('glfwJoystickPresent') {*}
 
 our sub get-joystick-axes(
     int32 $joystick,
     int32 $count is rw
-) returns CArray[num32] is native('glfw') is symbol('glfwGetJoystickAxes') {*}
+) returns CArray[num32] is native('glfw', v3) is symbol('glfwGetJoystickAxes') {*}
 
 our sub get-joystick-buttons(
     int32 $joystick,
     int32 $count is rw
-) returns Str is native('glfw') is symbol('glfwGetJoystickButtons') {*}
+) returns Str is native('glfw', v3) is symbol('glfwGetJoystickButtons') {*}
 
 our sub get-joystick-name(
     int32 $joystick
-) returns Str is native('glfw') is symbol('glfwGetJoystickName') {*}
+) returns Str is native('glfw', v3) is symbol('glfwGetJoystickName') {*}
 
 our sub set-joystick-callback(
     &callback (int32, int32)
-) is native('glfw') is symbol('glfwSetJoystickCallback') {*}
+) is native('glfw', v3) is symbol('glfwSetJoystickCallback') {*}
 
 our sub get-time(
-) returns num64 is native('glfw') is symbol('glfwGetTime') {*}
+) returns num64 is native('glfw', v3) is symbol('glfwGetTime') {*}
 
 our sub set-time(
     num64 $time
-) is native('glfw') is symbol('glfwSetTime') {*}
+) is native('glfw', v3) is symbol('glfwSetTime') {*}
 
 our sub get-timer-value(
-) returns uint64 is native('glfw') is symbol('glfwGetTimerValue') {*}
+) returns uint64 is native('glfw', v3) is symbol('glfwGetTimerValue') {*}
 
 our sub get-timer-frequency(
-) returns uint64 is native('glfw') is symbol('glfwGetTimerFrequency') {*}
+) returns uint64 is native('glfw', v3) is symbol('glfwGetTimerFrequency') {*}
 
 our sub swap-interval(
     int32 $interval
-) is native('glfw') is symbol('glfwSwapInterval') {*}
+) is native('glfw', v3) is symbol('glfwSwapInterval') {*}
 
 our sub extension-supported(
     Str $extension
-) is native('glfw') is symbol('glfwExtensionSupported') {*}
+) is native('glfw', v3) is symbol('glfwExtensionSupported') {*}
 
 # FIXME: this is probably broken
 our sub get-proc-address(
     Str $proc-name
-) returns Pointer is native('glfw') is symbol('glfwGetProcAddress') {*}
+) returns Pointer is native('glfw', v3) is symbol('glfwGetProcAddress') {*}
 
 our sub vulkan-supported(
-) returns int32(Bool) is native('glfw') is symbol('glfwGetProcAddress') {*}
+) returns int32(Bool) is native('glfw', v3) is symbol('glfwGetProcAddress') {*}
 
 our sub get-required-instance-extensions(
     int32 $count is rw
-) returns CArray[Str] is native('glfw') is symbol('glfwGetRequiredInstanceExtensions') {*}
+) returns CArray[Str] is native('glfw', v3) is symbol('glfwGetRequiredInstanceExtensions') {*}
 
 # TODO: get some Vulkan stuff defined.  We need a Vulkan package with
 # Vulkan::Instance, Vulkan::PhysicalDevice, Vulkan::SurfaceKHR, and
@@ -107,20 +107,20 @@ our sub get-required-instance-extensions(
 # our sub get-instance-proc-address(
 #     Vulkan::Instance $instance,
 #     Str $proc-name
-# ) returns Pointer is native('glfw') is symbol('glfwGetInstanceProcAddress') {*}
+# ) returns Pointer is native('glfw', v3) is symbol('glfwGetInstanceProcAddress') {*}
 
 # our sub get-physical-device-presentation-support(
 #     Vulkan::Instance $instance,
 #     Vulkan::PhysicalDevice $device,
 #     uint32 $queue-family
-# ) returns int32(Bool) is native('glfw') is symbol('glfwGetPhysicalDevicePresentationSupport') {*}
+# ) returns int32(Bool) is native('glfw', v3) is symbol('glfwGetPhysicalDevicePresentationSupport') {*}
 
 # our sub create-window-surface(
 #     Vulkan::Instance $instance,
 #     Window $window,
 #     Vulkan::AllocationCallbacks $allocator,
 #     Vulkan::SurfaceKHR $surface
-# ) returns Vulkan::Result is native('glfw') is symbol('glfwCreateWindowSurface') {*}
+# ) returns Vulkan::Result is native('glfw', v3) is symbol('glfwCreateWindowSurface') {*}
 
 
 ## OpenGL (TODO: consider moving this stuff out to a separate
@@ -147,33 +147,33 @@ our enum MatrixMode(
 );
 
 our sub gl-viewport(int32, int32, int32, int32)
-is native('glfw') is symbol('glViewport') {*}
+is native('GL', v1) is symbol('glViewport') {*}
 
 our sub gl-clear(int32)
-is native('glfw') is symbol('glClear') {*}
+is native('GL', v1) is symbol('glClear') {*}
 
 our sub gl-matrix-mode(int32)
-is native('glfw') is symbol('glMatrixMode') {*}
+is native('GL', v1) is symbol('glMatrixMode') {*}
 
 our sub gl-load-identity()
-is native('glfw') is symbol('glLoadIdentity') {*}
+is native('GL', v1) is symbol('glLoadIdentity') {*}
 
 our sub gl-ortho(num64, num64, num64, num64, num64, num64)
-is native('glfw') is symbol('glOrtho') {*}
+is native('GL', v1) is symbol('glOrtho') {*}
 
 our sub gl-rotatef(num32, num32, num32, num32)
-is native('glfw') is symbol('glRotatef') {*}
+is native('GL', v1) is symbol('glRotatef') {*}
 
 our sub gl-begin(int32)
-is native('glfw') is symbol('glBegin') {*}
+is native('GL', v1) is symbol('glBegin') {*}
 
 our sub gl-color3f(num32, num32, num32)
-is native('glfw') is symbol('glColor3f') {*}
+is native('GL', v1) is symbol('glColor3f') {*}
 
 our sub gl-vertex3f(num32, num32, num32)
-is native('glfw') is symbol('glVertex3f') {*}
+is native('GL', v1) is symbol('glVertex3f') {*}
 
 our sub gl-end()
-is native('glfw') is symbol('glEnd') {*}
+is native('GL', v1) is symbol('glEnd') {*}
 
 our constant GL_COLOR_BUFFER_BIT = 0x00004000;

@@ -39,12 +39,12 @@ multi sub create-cursor(
     GLFW::Image $image,
     int32 $xhot,
     int32 $yhot
-) returns GLFW::Cursor is native('glfw') is symbol('glfwCreateCursor') {*}
+) returns GLFW::Cursor is native('glfw', v3) is symbol('glfwCreateCursor') {*}
 
 multi sub create-cursor(
     int32 $shape
-) returns GLFW::Cursor is native('glfw') is symbol('glfwCreateStandardCursor') {*}
+) returns GLFW::Cursor is native('glfw', v3) is symbol('glfwCreateStandardCursor') {*}
 
 our sub destroy-cursor(
     GLFW::Cursor $cursor
-) is native('glfw') is symbol('glfwDestroyCursor') {*}
+) is native('glfw', v3) is symbol('glfwDestroyCursor') {*}

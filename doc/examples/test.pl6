@@ -1,6 +1,6 @@
-#!/usr/bin/env perl6
+#!/usr/bin/env raku
 use v6;
-use lib "lib";
+use lib "../../lib";
 
 use GLFW;
 use GLFW::Window;
@@ -16,19 +16,24 @@ sub key-callback(GLFW::Window $window,
                  int32 $action,
                  int32 $mods) {
     if $key == 256 and $action == 1 {
-        # MoarVM panics if we use the object-oriented approach here.
-        # Until I figure out why, we use the procedural approach
-        # instead.
-        # $window.should_close = True;
-        GLFW::set-window-should-close($window, True);
+        # FIXME: why does MoarVM panic here?
+        $window.should_close = True;
+	# I originally thought that doing the procedural equivalent,
+	# i.e. GLFW::set-window-should-close($window, True), was
+	# enough to work around this, but as of MoarVM 2024.04 even
+	# that seems to cause a panic, too.  What gives?
     }
+}
+
+sub close-callback(GLFW::Window $window) {
+    say "HIT";
 }
 
 sub start-gui() {
     my num32 $ratio;
     my int32 $width = 640;
     my int32 $height = 480;
-    my Str $title = "Stead";
+    my Str $title = "Raku GLFW Test";
     
     GLFW::set-error-callback(&error-callback);
 
@@ -40,6 +45,7 @@ sub start-gui() {
     GLFW::swap-interval(1);
 
     $window.key-callback = &key-callback;
+    $window.close-callback = &close-callback;
 
     until $window.should-close {
         ($width, $height) = $window.framebuffer-size;
