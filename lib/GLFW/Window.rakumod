@@ -388,7 +388,7 @@ our sub create-window(
 
 our sub destroy-window(
     GLFW::Window $window
-) is native('glfw', v3) is symbol('glfwCreateWindow') {*}
+) is native('glfw', v3) is symbol('glfwDestroyWindow') {*}
 
 our sub window-should-close(
     GLFW::Window $window
