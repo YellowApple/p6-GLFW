@@ -1,7 +1,7 @@
 {
     "perl"        : "6.c",
     "name"        : "GLFW",
-    "version"     : "0.1.1",
+    "version"     : "0.1.2",
     "description" : "Raku wrapper around GLFW3",
     "authors"     : [ "Ryan S. Northrup" ],
     "auth"        : "zef:YellowApple",
